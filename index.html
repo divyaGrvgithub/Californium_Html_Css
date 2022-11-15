@@ -1,0 +1,173 @@
+<html lang="en"><head><base href="https://raw.githubusercontent.com/sabihak89/functionUp/main/swoosh/index.html">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Swoosh</title>
+  <style>@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  height: 100vh;
+}
+
+.slider-container {
+  position: relative;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+.left-slide {
+  height: 100%;
+  width: 35%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.5s ease-in-out;
+}
+
+.left-slide > div {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.left-slide h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+  margin-top: -30px;
+}
+
+.right-slide {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 35%;
+  width: 65%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.right-slide > div {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  height: 100%;
+  width: 100%;
+}
+
+button {
+  background-color: #fff;
+  border: none;
+  color: #aaa;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 15px;
+}
+
+button:hover {
+  color: #222;
+}
+
+button:focus {
+  outline: none;
+}
+
+.slider-container .action-buttons button {
+  position: absolute;
+  left: 35%;
+  top: 50%;
+  z-index: 100;
+}
+
+.slider-container .action-buttons .down-button {
+  transform: translateX(-100%);
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.slider-container .action-buttons .up-button {
+  transform: translateY(-100%);
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+</style></head>
+  <body>
+    <div class="slider-container">
+      <div class="left-slide" style="top: -300vh;">
+        <div style="background-color: #2d17d5">
+          <h1>Call of Duty</h1>
+          <p>Call of Duty is a first-person shooter video game.</p>
+        </div>
+        <div style="background-color: #045f1b">
+          <h1>Project IGI</h1>
+          <p>It's a tactical first-person shooter video game</p>
+        </div>
+        <div style="background-color: #df6d20">
+          <h1>PUBG</h1>
+          <p>PUBG stands for PlayerUnknown's Battlegrounds.</p>
+        </div>
+        <div style="background-color: #6e66ff">
+          <h1>Vice City</h1>
+          <p>Vice City is an action-adventure game.</p>
+        </div>
+      </div>
+      <div class="right-slide">
+        <div style="background-image: url('https://wallpaperaccess.com/full/2243596.jpg')"></div>
+        <div style="background-image: url('https://wallpaperaccess.com/full/1133687.jpg')"></div>
+        <div style="background-image: url('https://i.pinimg.com/originals/78/7d/8a/787d8a9443a8abda5d9eac0e50f24233.png')"></div>
+        <div style="background-image: url('https://images2.alphacoders.com/597/thumb-1920-597965.jpg')"></div>
+      </div>
+      <div class="action-buttons">
+        <button class="down-button">
+          <i class="fas fa-arrow-down"></i>
+        </button>
+        <button class="up-button">
+          <i class="fas fa-arrow-up"></i>
+        </button>
+      </div>
+    </div>
+
+    <script type="text/htmlpreview" src="script.js"></script>
+  
+<script>const sliderContainer = document.querySelector('.slider-container')
+const slideRight = document.querySelector('.right-slide')
+const slideLeft = document.querySelector('.left-slide')
+const upButton = document.querySelector('.up-button')
+const downButton = document.querySelector('.down-button')
+const slidesLength = slideRight.querySelectorAll('div').length
+
+let activeSlideIndex = 0
+
+slideLeft.style.top = `-${(slidesLength - 1) * 100}vh`
+
+upButton.addEventListener('click', () => changeSlide('up'))
+downButton.addEventListener('click', () => changeSlide('down'))
+
+const changeSlide = (direction) => {
+    const sliderHeight = sliderContainer.clientHeight
+    if(direction === 'up') {
+        activeSlideIndex++
+        if(activeSlideIndex > slidesLength - 1) {
+            activeSlideIndex = 0
+        }
+    } else if(direction === 'down') {
+        activeSlideIndex--
+        if(activeSlideIndex < 0) {
+            activeSlideIndex = slidesLength - 1
+        }
+    }
+
+    slideRight.style.transform = `translateY(-${activeSlideIndex * sliderHeight}px)`
+    slideLeft.style.transform = `translateY(${activeSlideIndex * sliderHeight}px)`
+}</script></body></html>
